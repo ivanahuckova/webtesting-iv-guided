@@ -5,19 +5,24 @@ module.exports = {
   update,
   remove,
   getAll,
-  findById,
+  findById
 };
 
 async function insert(hobbit) {
-  return null;
+  const [id] = await db('hobbits').insert(hobbit);
+  return await db('hobbits')
+    .where({ id })
+    .first();
 }
 
 async function update(id, changes) {
   return null;
 }
 
-function remove(id) {
-  return null;
+async function remove(id) {
+  return await db('hobbits')
+    .where({ id })
+    .del();
 }
 
 function getAll() {

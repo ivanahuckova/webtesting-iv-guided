@@ -7,7 +7,9 @@ const server = express();
 server.use(express.json());
 
 server.get('/', async (req, res) => {
-  res.status(200).json({ api: 'up' });
+  const message = req.query.name ? `Welcome, ${req.query.name}` : 'up';
+  res.set('Set-Cookie', 'know=true');
+  res.status(200).json({ api: message });
 });
 
 server.get('/hobbits', async (req, res) => {
